@@ -19,7 +19,7 @@ start.bat
 
 `start.bat` creates the virtual environment in `%LOCALAPPDATA%\AcousticMaskingLab\venv` (not in OneDrive), builds `frontend/dist` if missing, and starts the server at http://127.0.0.1:8770.
 
-CASP: download `amtoolbox-full-1.6.0.zip` from <https://sourceforge.net/projects/amtoolbox/files/AMT%201.x/> and unzip into `%LOCALAPPDATA%\AcousticMaskingLab\amt` (so that `...\amt\amtoolbox-1.6.0\models\paulick2024.m` exists). Override locations with `AML_AMT_ROOT` and `AML_MATLAB`. Without them the CASP page is disabled and everything else works.
+CASP: `start.bat` downloads and unpacks AMT 1.6.0 automatically (`scripts/install_amt.py`, SHA-256 checked, about 14 MB) into `%LOCALAPPDATA%\AcousticMaskingLab\amt`. AMT is not stored in this repository because it is a separate GPL v3+ package with bundled third-party toolboxes (see `THIRD_PARTY_NOTICES.md`). Override locations with `AML_AMT_ROOT` and `AML_MATLAB`. Without MATLAB the CASP page is disabled and everything else works.
 
 Development: `cd frontend && npm run dev` (Vite on :5173, proxies `/api` to :8770); `cd frontend && npx tsc --noEmit && npx vite build`.
 

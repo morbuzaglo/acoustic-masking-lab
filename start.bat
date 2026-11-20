@@ -17,8 +17,8 @@ if not exist "%~dp0frontend\dist\index.html" (
   popd
 )
 if not exist "%AML_AMT_ROOT%\models\paulick2024.m" (
-  echo NOTE: AMT 1.6.0 not found in %AML_AMT_ROOT%. The CASP page will be disabled.
-  echo       Download amtoolbox-full-1.6.0.zip from https://sourceforge.net/projects/amtoolbox/files/AMT%%201.x/ and unzip it to %BASE%\amt
+  echo Installing AMT 1.6.0 for the CASP page ...
+  "%VENV%\Scripts\python.exe" "%~dp0scripts\install_amt.py" "%BASE%\amt" || echo AMT install failed: the CASP page will be disabled.
 )
 echo Starting on http://127.0.0.1:8770
 start "" http://127.0.0.1:8770
