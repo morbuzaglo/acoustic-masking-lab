@@ -1,0 +1,6 @@
+{
+ "in_var": 619.2355568830343,
+ "anchor": "1 kHz 500 ms tone, white noise, CR=18 dB -> P2AFC=0.75",
+ "in_var_amt_default": 40.0,
+ "mu_ref": 23.740173221201854
+}
