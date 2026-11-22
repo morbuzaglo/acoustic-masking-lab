@@ -5,12 +5,12 @@ Acoustic Masking Lab: local web app (FastAPI + React/Plotly) that predicts wheth
 ## Commands (Windows)
 ```bat
 start.bat                                                                 :: setup + run on http://127.0.0.1:8770
-%LOCALAPPDATA%\AcousticMaskingLab\venv\Scripts\python.exe -m pytest -q backend\tests      :: 27 tests, ~2-6 min
+%LOCALAPPDATA%\AcousticMaskingLab\venv\Scripts\python.exe -m pytest -q backend\tests      :: 32 tests, ~2-6 min (single test: append `-k round_trip`)
 %LOCALAPPDATA%\AcousticMaskingLab\venv\Scripts\python.exe backend\tests\casp_validation_suite.py   :: MATLAB CASP validation, ~40 min
 %LOCALAPPDATA%\AcousticMaskingLab\venv\Scripts\python.exe backend\tests\model_validation.py        :: scenario study + simulated listener
 cd frontend && npx tsc --noEmit && npx vite build                          :: UI build into frontend/dist (served by FastAPI)
 ```
-Node is at `C:\Program Files\nodejs` (may be missing from the Bash PATH). `frontend/node_modules` is a **junction** to `%LOCALAPPDATA%\AcousticMaskingLab\fe_node_modules` (OneDrive must not sync it; a sync of thousands of files starved the machine and froze the browser tests). AMT 1.6.0 lives in `%LOCALAPPDATA%\AcousticMaskingLab\amt\amtoolbox-1.6.0`.
+Node is at `C:\Program Files\nodejs` (may be missing from the Bash PATH). `frontend/node_modules` is a **junction** to `%LOCALAPPDATA%\AcousticMaskingLab\fe_node_modules` (OneDrive must not sync it; a sync of thousands of files starved the machine and froze the browser tests). AMT 1.6.0 is not in the repo (GPL, bundled toolboxes, see `THIRD_PARTY_NOTICES.md`): `scripts/install_amt.py` (run by `start.bat`) downloads it to `%LOCALAPPDATA%\AcousticMaskingLab\amt\amtoolbox-1.6.0` (override with `AML_AMT_ROOT`, `AML_MATLAB`). CASP runs through `matlab -batch` subprocesses, not matlabengine.
 
 ## Architecture
 `backend/aml/`: units, audio_io (calibration, background subtraction), spectra, generators (maskers + SYNTHETIC targets), fastmodel (ERB-EDM), loudness (proxies), optimize (band-gain optimiser), experiments (2AFC), casp_bridge + `matlab/casp_run.m` (real CASP), reports, service. `backend/app.py` is the thin HTTP layer. UI pages in `frontend/src/pages`.
