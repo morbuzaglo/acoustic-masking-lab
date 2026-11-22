@@ -14,6 +14,7 @@ Node is at `C:\Program Files\nodejs` (may be missing from the Bash PATH). `front
 
 ## Architecture
 `backend/aml/`: units, audio_io (calibration, background subtraction), spectra, generators (maskers + SYNTHETIC targets), fastmodel (ERB-EDM), loudness (proxies), optimize (band-gain optimiser), experiments (2AFC), casp_bridge + `matlab/casp_run.m` (real CASP), reports, service. `backend/app.py` is the thin HTTP layer. UI pages in `frontend/src/pages`.
+`service.Workspace` holds one project's calibrated target and renders maskers; `projects.py` persists projects (`.amlproj` = project.json + arrays.npz) and the scene library (autosaved scenes + uploaded masker audio) under `data/` (gitignored, `AML_DATA_DIR` overrides; tests use a temp dir). Presets = factory scenes overridden/extended by the library. The frontend store autosaves scenes to the library. Hebrew Word summary: `docs/word/build_word.py` (needs the AcousticBook venv and its `docbuilder`).
 
 ## Rules that must survive changes
 - Never present fast-model numbers as CASP. CASP = unmodified AMT `paulick2024` front end; the noise-masker decision variance is **re-calibrated** (docs/validation/casp_calibration.json); show raw and calibrated.
